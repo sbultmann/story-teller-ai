@@ -16,7 +16,7 @@ def generate_story(gpt_prompt):
     client = OpenAI()
     print("Creating story ...")
     response = client.chat.completions.create(
-        temperature = 1.3,
+        temperature = 1.0,
         model="gpt-4-1106-preview",
         messages=messages,
     )
@@ -53,12 +53,12 @@ def split_story(story):
             current_chunk_length = len(word)
             chunk = []
             chunk.append(word)
+    result.append(" ".join(chunk))
     return result
 
 if __name__ == "__main__":
     gpt_prompt = input("Was soll in der Geschichte passieren: ")
     story = generate_story(gpt_prompt)
-    
     for i,split in enumerate(split_story(story)):
         print(len(split))
         text_to_speech(split, "onyx", f'Story.{time.time()}.{str(i).zfill(3)}.mp3')

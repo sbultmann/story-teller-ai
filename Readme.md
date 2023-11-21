@@ -16,3 +16,5 @@ OPENAI_API_KEY=YOUR_API_KEY_GOES_HERE
 ```bash
 python main.py
 ```
+## Tips
+Make sure you tell GPT4 how long the story should be. Otherwise the story could become very long (and expensive)
