@@ -42,9 +42,9 @@ def split_story(story):
     """TTS cannot deal with strings longer than 4096"""
     splitted_story = story.split()
     current_chunk_length = 0
-    chunks = []
+    chunk = []
     result = []
-    for word in story:
+    for word in splitted_story:
         if current_chunk_length<4000:
             current_chunk_length += len(word)
             chunk.append(word)
