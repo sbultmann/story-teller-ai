@@ -9,8 +9,8 @@ load_dotenv()
 
 def generate_story(gpt_prompt):
     messages=[
-        {"role": "system", "content":   "Du bist ein Autor von Geschichten und Erzählungen, die als Hörbuch vertont werden. \
-                                        Erzeuge eine interessante Geschichte anhand der User angaben."},
+        {"role": "system", "content":   "Du bist ein Autor von Geschichten und Erzählungen. \
+                                        Erzeuge eine interessante Geschichte anhand der User-Angaben."},
         {"role": "user", "content": gpt_prompt}
         ]
     client = OpenAI()
@@ -45,7 +45,7 @@ def split_story(story):
     chunk = []
     result = []
     for word in splitted_story:
-        if current_chunk_length<4000:
+        if current_chunk_length<3500:
             current_chunk_length += len(word)
             chunk.append(word)
         else:
@@ -55,15 +55,12 @@ def split_story(story):
             chunk.append(word)
     return result
 
-
-#Eine kurze Fantasy GEschichte über eine Gruppe tollkühner Projektmanager die sich im IT Bereich mit schwierigen Projekten im Bereich Kryptoanalyse beschäftigen. Die mitarbeiter sind of kompliziert und verschlossen. Klassische IT-Profis halt.
-
 if __name__ == "__main__":
     gpt_prompt = input("Was soll in der Geschichte passieren: ")
     story = generate_story(gpt_prompt)
     
     for i,split in enumerate(split_story(story)):
-        print(split)
+        print(len(split))
         text_to_speech(split, "onyx", f'Story.{time.time()}.{str(i).zfill(3)}.mp3')
     save_story(story, f'Story.{time.time()}.txt')
     print('done!')
