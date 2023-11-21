@@ -10,7 +10,8 @@ load_dotenv()
 def generate_story(gpt_prompt):
     messages=[
         {"role": "system", "content":   "Du bist ein Autor von Geschichten und Erzählungen, die als Hörbuch vertont werden. \
-                                        Erzeuge eine interessante Geschichte anhand der User angaben."},
+                                        Erzeuge eine interessante Geschichte anhand der User angaben. Die Geschichte darf \
+                                        nicht mehr als 4096 characters haben."},
         {"role": "user", "content": gpt_prompt}
         ]
     client = OpenAI()
